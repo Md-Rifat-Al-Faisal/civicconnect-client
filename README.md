@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CivicConnect - Community Social Development Platform
 
-## Getting Started
+CivicConnect is a grassroots social development and volunteer coordination platform where citizens, students, and community organizers create, discover, and join local impact initiatives across Bangladesh.
 
-First, run the development server:
+- **Live Client Web App**: [https://civicconnect-client.vercel.app](https://civicconnect-client.vercel.app)
+- **Live Server REST API**: [https://civicconnect-server.vercel.app](https://civicconnect-server.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Test Volunteer Account Credentials
+For examiner evaluations and testing:
+- **Email**: `volunteer@civicconnect.org`
+- **Password**: `Volunteer123!`
+
+## 5+ Key Feature Highlights
+1. **Interactive Community Event Discovery**: Browse future-dated events filtered dynamically by category (Cleanup, Plantation, Donation, Food Drive, Health Camp, Winter Relief, Education, Charity) with instant title/location search.
+2. **End-to-End Event Management**: Authenticated community leaders can organize new events with future date validation, edit event parameters in modal overlays, and delete events with cascading RSVP cleanup.
+3. **One-Click Volunteer RSVP with Cancellation**: Community members can volunteer for any event, backed by unique compound indexes and real-time status toggles, with the ability to cancel attendance at any time via a dedicated confirmation modal.
+4. **Secure Authentication with Better-Auth**: Robust session management featuring email/password sign-up (with optional photoURL and strict password strength requirements) and Google OAuth integration, issuing JWKS-verifiable JWTs to protected backend APIs.
+5. **Modern Civic Theme with Dual Mode**: Rich emerald/teal palette, warm amber accents, soft elevations, glassmorphism cards, micro-interactions, responsive navigation, and dark/light mode toggle with zero hydration flicker.
+6. **Volunteer Profile Customization**: Users can view their volunteer credentials, member registration history, and update their display name and profile avatar dynamically.
+
+## Tech Stack
+- **Framework**: Next.js 16 (App Router, Turbopack, React 19)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4, Framer Motion
+- **Authentication**: Better-Auth (MongoDB Adapter, JWT plugin with JWKS endpoint)
+- **Database**: MongoDB Atlas (`civicconnect_db`)
+- **Icons & Feedback**: Lucide React, Sonner Toasts
+- **Theme**: Next-Themes (Dark & Light support)
+
+## Environment Variables (`.env.local`)
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_CLIENT_URL=http://localhost:3000
+BETTER_AUTH_URL=http://localhost:3000
+BETTER_AUTH_SECRET=9f8e4c7b2a1d6e3f5a0b9c8d7e6f4a3b
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.dp0xghu.mongodb.net/civicconnect_db?appName=Cluster0
+GOOGLE_CLIENT_ID=<your-google-client-id>
+GOOGLE_CLIENT_SECRET=<your-google-client-secret>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Getting Started Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone and install dependencies**:
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.

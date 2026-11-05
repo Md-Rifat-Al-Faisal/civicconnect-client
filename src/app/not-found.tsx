@@ -7,7 +7,7 @@ import { PrimaryButton } from "@/components/shared/theme-ui";
 export default function NotFound() {
   return (
     <div className="flex min-h-[75vh] flex-col items-center justify-center px-4 py-16 text-center">
-      <div className="mb-6 flex size-20 items-center justify-center rounded-sm border-2 border-border bg-blue-500/10 text-blue-600 dark:text-blue-400 shadow-none">
+      <div className="mb-6 flex size-20 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary shadow-soft">
         <FileQuestion className="size-10" />
       </div>
 
@@ -20,7 +20,7 @@ export default function NotFound() {
       </h2>
 
       <p className="mt-3 max-w-md text-sm text-muted-foreground sm:text-base">
-        The community initiative or page you are looking for does not exist, has been removed, or is temporarily unavailable.
+        The community event or page you are looking for does not exist, has been removed, or is temporarily unavailable.
       </p>
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

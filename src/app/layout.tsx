@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "CivicConnect - Social Development Events Platform",
   description:
-    "Community-driven event management platform where citizens create, join, and track local social service initiatives across Bangladesh.",
+    "Community-driven event management platform where citizens create, join, and track local social development events across Bangladesh.",
 };
 
 export default function RootLayout({

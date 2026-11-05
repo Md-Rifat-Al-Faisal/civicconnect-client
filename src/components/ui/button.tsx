@@ -13,25 +13,25 @@ export function Button({
   ...props
 }: ButtonProps) {
   const variantStyles = {
-    default: "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white",
-    destructive: "bg-red-600 text-white hover:bg-red-700",
-    outline: "border-2 border-border bg-transparent text-foreground hover:bg-muted",
-    secondary: "bg-secondary text-secondary-foreground hover:bg-muted",
+    default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs",
+    destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-xs",
+    outline: "border border-border bg-card text-foreground hover:bg-muted shadow-xs",
+    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
     ghost: "text-foreground hover:bg-muted",
-    link: "text-blue-600 underline-offset-4 hover:underline dark:text-blue-400",
+    link: "text-primary underline-offset-4 hover:underline",
   };
 
   const sizeStyles = {
     default: "h-10 px-4 py-2 text-sm",
-    sm: "h-8 rounded-sm px-3 text-xs",
-    lg: "h-11 rounded-sm px-8 text-base",
+    sm: "h-8 rounded-md px-3 text-xs",
+    lg: "h-11 rounded-lg px-8 text-base",
     icon: "size-10",
   };
 
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+        "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
         variantStyles[variant],
         sizeStyles[size],
         className

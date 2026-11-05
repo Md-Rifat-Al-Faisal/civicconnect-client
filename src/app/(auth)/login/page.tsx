@@ -1,32 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { AnimatedCard, PrimaryButton } from "@/components/shared/theme-ui";
+import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { HeartHandshake, LogIn, Mail, Lock, Loader2 } from "lucide-react";
+import { Logo } from "@/components/shared/logo";
+import { LogIn, Mail, Lock, Loader2 } from "lucide-react";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect") || "/";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
-      toast.error("Please enter both email and password.");
+
+    const newErrors: Record<string, string> = {};
+
+    if (!email.trim()) {
+      newErrors.email = "Please enter your email address.";
+    }
+
+    if (!password) {
+      newErrors.password = "Please enter your account password.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
+    setErrors({});
     setLoading(true);
+
     const { data, error } = await authClient.signIn.email({
-      email,
+      email: email.trim(),
       password,
     });
     setLoading(false);
@@ -38,7 +56,7 @@ export default function LoginPage() {
 
     if (data) {
       toast.success("Welcome back to CivicConnect!");
-      router.push("/");
+      router.push(redirectUrl);
       router.refresh();
     }
   };
@@ -48,7 +66,7 @@ export default function LoginPage() {
     try {
       await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/",
+        callbackURL: redirectUrl,
       });
     } catch {
       setGoogleLoading(false);
@@ -60,8 +78,8 @@ export default function LoginPage() {
     <div className="flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mx-auto flex size-12 items-center justify-center rounded-sm bg-blue-600 text-white shadow-none dark:bg-blue-600 dark:text-white">
-            <HeartHandshake className="size-6" />
+          <div className="mx-auto flex justify-center">
+            <Logo size="lg" />
           </div>
           <h1 className="mt-4 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
             Welcome Back
@@ -71,10 +89,15 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <AnimatedCard className="p-8 rounded-sm">
+        <AnimatedCard className="p-8">
           <form onSubmit={handleEmailLogin} className="space-y-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="email">Email Address</Label>
+            <FormField
+              label="Email Address"
+              htmlFor="email"
+              required
+              hint="You will use this to log in"
+              error={errors.email}
+            >
               <div className="relative">
                 <Mail className="absolute top-3 left-3 size-4 text-muted-foreground" />
                 <Input
@@ -83,16 +106,22 @@ export default function LoginPage() {
                   required
                   placeholder="volunteer@civicconnect.org"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                  }}
                   className="pl-9"
                 />
               </div>
-            </div>
+            </FormField>
 
-            <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-              </div>
+            <FormField
+              label="Password"
+              htmlFor="password"
+              required
+              hint="Your account password"
+              error={errors.password}
+            >
               <div className="relative">
                 <Lock className="absolute top-3 left-3 size-4 text-muted-foreground" />
                 <Input
@@ -101,11 +130,14 @@ export default function LoginPage() {
                   required
                   placeholder="••••••••"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (errors.password) setErrors((prev) => ({ ...prev, password: "" }));
+                  }}
                   className="pl-9"
                 />
               </div>
-            </div>
+            </FormField>
 
             <PrimaryButton
               type="submit"
@@ -141,7 +173,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={googleLoading}
-            className="flex w-full items-center justify-center gap-2.5 rounded-sm border-2 border-border bg-card py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 cursor-pointer"
+            className="flex w-full items-center justify-center gap-2.5 rounded-md border border-border bg-card py-2.5 text-sm font-semibold text-foreground shadow-xs transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 cursor-pointer"
           >
             {googleLoading ? (
               <Loader2 className="size-4 animate-spin text-muted-foreground" />
@@ -172,7 +204,7 @@ export default function LoginPage() {
             Don&apos;t have an account?{" "}
             <Link
               href="/register"
-              className="font-semibold text-blue-600 underline-offset-4 hover:underline dark:text-blue-400"
+              className="font-semibold text-primary underline-offset-4 hover:underline"
             >
               Create one now
             </Link>
@@ -180,5 +212,19 @@ export default function LoginPage() {
         </AnimatedCard>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[50vh] items-center justify-center">
+          <Loader2 className="size-8 animate-spin text-primary" />
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

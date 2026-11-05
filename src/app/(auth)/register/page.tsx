@@ -6,54 +6,67 @@ import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { AnimatedCard, PrimaryButton } from "@/components/shared/theme-ui";
+import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Logo } from "@/components/shared/logo";
 import {
-  HeartHandshake,
   UserPlus,
   User,
   Mail,
   Lock,
   Loader2,
   CheckCircle2,
+  ImageIcon,
 } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
-      toast.error("Please fill in all registration fields.");
+    const newErrors: Record<string, string> = {};
+
+    if (!name.trim()) {
+      newErrors.name = "Please enter your full name as you want it shown on your profile.";
+    }
+
+    if (!email.trim()) {
+      newErrors.email = "Please enter your email address.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!password) {
+      newErrors.password = "Please create a password.";
+    } else if (password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long.";
+    } else if (!/[A-Z]/.test(password)) {
+      newErrors.password = "Password must contain at least one uppercase letter (A-Z).";
+    } else if (!/[a-z]/.test(password)) {
+      newErrors.password = "Password must contain at least one lowercase letter (a-z).";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long.");
-      return;
-    }
-
-    if (!/[A-Z]/.test(password)) {
-      toast.error("Password must contain at least one uppercase letter (A-Z).");
-      return;
-    }
-
-    if (!/[a-z]/.test(password)) {
-      toast.error("Password must contain at least one lowercase letter (a-z).");
-      return;
-    }
-
+    setErrors({});
     setLoading(true);
+
     const { data, error } = await authClient.signUp.email({
-      name,
-      email,
+      name: name.trim(),
+      email: email.trim(),
       password,
+      image: photoURL.trim() ? photoURL.trim() : undefined,
     });
     setLoading(false);
 
@@ -86,21 +99,29 @@ export default function RegisterPage() {
     <div className="flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mx-auto flex size-12 items-center justify-center rounded-sm bg-blue-600 text-white shadow-none dark:bg-blue-600 dark:text-white">
-            <HeartHandshake className="size-6" />
+          <div className="mx-auto flex justify-center">
+            <Logo size="lg" />
           </div>
           <h1 className="mt-4 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
             Join CivicConnect
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Create an account to organize, join, and support local community drives
+            Create an account to organize, join, and support local community events
           </p>
         </div>
 
-        <AnimatedCard className="p-8 rounded-sm">
+        <AnimatedCard className="p-8">
+          <p className="mb-4 text-xs text-muted-foreground">
+            Fields marked with <span className="text-destructive font-bold">*</span> are required.
+          </p>
           <form onSubmit={handleRegister} className="space-y-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="name">Full Name</Label>
+            <FormField
+              label="Your Full Name"
+              htmlFor="name"
+              required
+              hint="As you want it shown on your profile"
+              error={errors.name}
+            >
               <div className="relative">
                 <User className="absolute top-3 left-3 size-4 text-muted-foreground" />
                 <Input
@@ -109,14 +130,22 @@ export default function RegisterPage() {
                   required
                   placeholder="Rafiqul Islam"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+                  }}
                   className="pl-9"
                 />
               </div>
-            </div>
+            </FormField>
 
-            <div className="space-y-1.5">
-              <Label htmlFor="email">Email Address</Label>
+            <FormField
+              label="Email Address"
+              htmlFor="email"
+              required
+              hint="You will use this to log in"
+              error={errors.email}
+            >
               <div className="relative">
                 <Mail className="absolute top-3 left-3 size-4 text-muted-foreground" />
                 <Input
@@ -125,23 +154,57 @@ export default function RegisterPage() {
                   required
                   placeholder="volunteer@civicconnect.org"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                  }}
                   className="pl-9"
                 />
               </div>
-            </div>
+            </FormField>
 
-            <div className="space-y-1.5">
-              <Label htmlFor="password">Password</Label>
+            <FormField
+              label="Profile Photo Link (optional)"
+              htmlFor="photoURL"
+              optional
+              hint="Paste a link to your photo, or leave empty"
+              error={errors.photoURL}
+            >
+              <div className="relative">
+                <ImageIcon className="absolute top-3 left-3 size-4 text-muted-foreground" />
+                <Input
+                  id="photoURL"
+                  type="url"
+                  placeholder="https://images.unsplash.com/photo-..."
+                  value={photoURL}
+                  onChange={(e) => {
+                    setPhotoURL(e.target.value);
+                    if (errors.photoURL) setErrors((prev) => ({ ...prev, photoURL: "" }));
+                  }}
+                  className="pl-9"
+                />
+              </div>
+            </FormField>
+
+            <FormField
+              label="Create a Password"
+              htmlFor="password"
+              required
+              hint="At least 6 characters, with one uppercase and one lowercase letter"
+              error={errors.password}
+            >
               <div className="relative">
                 <Lock className="absolute top-3 left-3 size-4 text-muted-foreground" />
                 <Input
                   id="password"
                   type="password"
                   required
-                  placeholder="At least 6 characters (Aa-Zz)"
+                  placeholder="••••••••"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (errors.password) setErrors((prev) => ({ ...prev, password: "" }));
+                  }}
                   className="pl-9"
                 />
               </div>
@@ -150,7 +213,7 @@ export default function RegisterPage() {
                   <CheckCircle2
                     className={`size-3.5 ${
                       password.length >= 6
-                        ? "text-blue-600 dark:text-blue-400"
+                        ? "text-primary"
                         : "text-muted-foreground/40"
                     }`}
                   />
@@ -160,7 +223,7 @@ export default function RegisterPage() {
                   <CheckCircle2
                     className={`size-3.5 ${
                       /[A-Z]/.test(password)
-                        ? "text-blue-600 dark:text-blue-400"
+                        ? "text-primary"
                         : "text-muted-foreground/40"
                     }`}
                   />
@@ -170,14 +233,14 @@ export default function RegisterPage() {
                   <CheckCircle2
                     className={`size-3.5 ${
                       /[a-z]/.test(password)
-                        ? "text-blue-600 dark:text-blue-400"
+                        ? "text-primary"
                         : "text-muted-foreground/40"
                     }`}
                   />
                   <span>At least one lowercase letter (a-z)</span>
                 </div>
               </div>
-            </div>
+            </FormField>
 
             <PrimaryButton
               type="submit"
@@ -213,7 +276,7 @@ export default function RegisterPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={googleLoading}
-            className="flex w-full items-center justify-center gap-2.5 rounded-sm border-2 border-border bg-card py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 cursor-pointer"
+            className="flex w-full items-center justify-center gap-2.5 rounded-md border border-border bg-card py-2.5 text-sm font-semibold text-foreground shadow-xs transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 cursor-pointer"
           >
             {googleLoading ? (
               <Loader2 className="size-4 animate-spin text-muted-foreground" />
@@ -244,7 +307,7 @@ export default function RegisterPage() {
             Already have an account?{" "}
             <Link
               href="/login"
-              className="font-semibold text-blue-600 underline-offset-4 hover:underline dark:text-blue-400"
+              className="font-semibold text-primary underline-offset-4 hover:underline"
             >
               Sign in instead
             </Link>

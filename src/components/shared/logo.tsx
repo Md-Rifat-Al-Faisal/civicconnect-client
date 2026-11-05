@@ -45,7 +45,7 @@ export function Logo({
           <defs>
             <linearGradient id="civicLogoGradient" x1="6" y1="2" x2="42" y2="46" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="var(--primary)" />
-              <stop offset="65%" stopColor="#0d9488" />
+              <stop offset="65%" stopColor="#275246" />
               <stop offset="100%" stopColor="var(--accent)" />
             </linearGradient>
             <linearGradient id="innerGlow" x1="16" y1="12" x2="32" y2="28" gradientUnits="userSpaceOnUse">
@@ -82,7 +82,7 @@ export function Logo({
       {showText && (
         <span className={cn("font-black tracking-tight leading-none", current.text)}>
           <span className="text-foreground">Civic</span>
-          <span className="bg-gradient-to-r from-primary via-teal-500 to-accent bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-primary via-[#366f5f] to-accent bg-clip-text text-transparent">
             Connect
           </span>
         </span>

@@ -3,65 +3,69 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView, useReducedMotion, animate } from "framer-motion";
 import {
-  CalendarCheck2,
+  Globe,
+  Sprout,
   Users,
-  MapPin,
-  HeartHandshake,
+  CalendarCheck2,
+  ArrowRight,
   LucideIcon,
 } from "lucide-react";
+import { PrimaryButton } from "@/components/shared/theme-ui";
 
 interface StatItem {
   value: number;
-  suffix: string;
-  label: string;
-  sublabel: string;
+  prefix?: string;
+  suffix?: string;
+  title: string;
+  description: string;
   icon: LucideIcon;
-  color: string;
 }
 
-const statsData: StatItem[] = [
+const statsColumnOne: StatItem[] = [
   {
-    value: 120,
-    suffix: "+",
-    label: "Events Completed",
-    sublabel: "Social development drives",
-    icon: CalendarCheck2,
-    color: "bg-primary/10 text-primary border border-primary/20",
+    value: 65,
+    suffix: "K",
+    title: "Lives Impacted",
+    description: "Direct aid delivered to underserved families.",
+    icon: Globe,
   },
   {
-    value: 5400,
-    suffix: "+",
-    label: "Volunteers Joined",
-    sublabel: "Engaged citizens & students",
+    value: 500,
+    prefix: "$",
+    suffix: "K",
+    title: "Funds Raised",
+    description: "Grassroots funding mobilized for verified drives.",
+    icon: Sprout,
+  },
+];
+
+const statsColumnTwo: StatItem[] = [
+  {
+    value: 10,
+    suffix: "K",
+    title: "Volunteers Engaged",
+    description: "Dedicated citizens and youth taking local action.",
     icon: Users,
-    color: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25",
   },
   {
-    value: 18,
-    suffix: "",
-    label: "Areas Covered",
-    sublabel: "Dhaka & nationwide cities",
-    icon: MapPin,
-    color: "bg-secondary text-secondary-foreground border border-border",
-  },
-  {
-    value: 25000,
+    value: 500,
     suffix: "+",
-    label: "Lives Touched",
-    sublabel: "Blankets, meals, trees, blood",
-    icon: HeartHandshake,
-    color: "bg-primary/15 text-primary border border-primary/25",
+    title: "Events Completed",
+    description: "Cleanups, food relief, and tree planting drives.",
+    icon: CalendarCheck2,
   },
 ];
 
 function StatCounter({
   target,
-  suffix,
+  prefix = "",
+  suffix = "",
   inView,
   shouldReduceMotion,
 }: {
   target: number;
-  suffix: string;
+  prefix?: string;
+  suffix?: string;
   inView: boolean;
   shouldReduceMotion: boolean;
 }) {
@@ -75,7 +79,7 @@ function StatCounter({
 
     if (inView) {
       const controls = animate(0, target, {
-        duration: 2,
+        duration: 1.6,
         ease: "easeOut",
         onUpdate: (latest) => setCount(Math.floor(latest)),
       });
@@ -85,63 +89,128 @@ function StatCounter({
 
   return (
     <span>
+      {prefix}
       {count.toLocaleString()}
       {suffix}
     </span>
   );
 }
 
+function StatCard({
+  item,
+  inView,
+  shouldReduceMotion,
+  delay = 0,
+}: {
+  item: StatItem;
+  inView: boolean;
+  shouldReduceMotion: boolean;
+  delay?: number;
+}) {
+  const Icon = item.icon;
+
+  return (
+    <motion.div
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay }}
+      className="flex min-h-[165px] sm:min-h-[175px] flex-col items-center justify-between rounded-xl border border-border/80 bg-white p-4 sm:p-5 text-center shadow-2xs transition-shadow duration-200 hover:shadow-sm dark:bg-card dark:border-border/60"
+    >
+      <div className="flex flex-col items-center">
+        <div className="flex size-9 sm:size-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xs">
+          <Icon className="size-4.5" />
+        </div>
+        <h3 className="mt-2 text-sm sm:text-base font-bold text-foreground">
+          {item.title}
+        </h3>
+        <p className="mt-1 max-w-[200px] text-[11px] sm:text-xs leading-normal text-muted-foreground">
+          {item.description}
+        </p>
+      </div>
+
+      <div className="mt-3 text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+        <StatCounter
+          target={item.value}
+          prefix={item.prefix}
+          suffix={item.suffix}
+          inView={inView}
+          shouldReduceMotion={shouldReduceMotion}
+        />
+      </div>
+    </motion.div>
+  );
+}
+
 export function StatsBar() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.3 });
+  const inView = useInView(ref, { once: true, amount: 0.2 });
   const shouldReduceMotion = useReducedMotion() ?? false;
 
   return (
     <section
       ref={ref}
-      aria-label="Community Statistics"
-      className="relative z-20 mx-auto -mt-10 max-w-7xl px-4 sm:-mt-12 sm:px-6 lg:px-8"
+      aria-label="Our Impact"
+      className="w-full border-y border-border/70 bg-[#dce5df] py-10 sm:py-12 lg:py-14 dark:bg-[#0c1f1c]"
     >
-      <div className="rounded-2xl border border-border/80 bg-card/85 p-6 shadow-lift backdrop-blur-md sm:p-8">
-        <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8">
-          {statsData.map((stat, idx) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={stat.label}
-                initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="group flex flex-col items-center text-center transition-transform hover:-translate-y-1 sm:items-start sm:text-left"
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+          <motion.div
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: -16 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.4 }}
+            className="flex flex-col items-start lg:col-span-5"
+          >
+            <span className="text-xs font-bold tracking-wide text-primary">
+              Our Impact
+            </span>
+
+            <h2 className="mt-1.5 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl lg:text-4xl leading-tight">
+              Giving Hope to Those{" "}
+              <span className="block sm:inline lg:block">in Need</span>
+            </h2>
+
+            <p className="mt-3 max-w-md text-xs sm:text-sm leading-relaxed text-muted-foreground">
+              Connecting volunteers across Bangladesh to deliver direct relief, care, and grassroots hope.
+            </p>
+
+            <div className="mt-5">
+              <PrimaryButton
+                href="/upcoming-events"
+                className="px-5 py-2.5 shadow-soft"
               >
-                <div
-                  className={`mb-3 flex size-12 items-center justify-center rounded-xl ${stat.color} shadow-xs transition-transform group-hover:scale-110`}
-                >
-                  <Icon className="size-6" />
-                </div>
-                <div className="text-2xl font-black tracking-tight text-foreground sm:text-3xl lg:text-4xl">
-                  <StatCounter
-                    target={stat.value}
-                    suffix={stat.suffix}
+                <span>See More</span>
+                <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </PrimaryButton>
+            </div>
+          </motion.div>
+
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4.5">
+              <div className="flex flex-col gap-4">
+                {statsColumnOne.map((item, idx) => (
+                  <StatCard
+                    key={item.title}
+                    item={item}
                     inView={inView}
                     shouldReduceMotion={shouldReduceMotion}
+                    delay={idx * 0.08}
                   />
-                </div>
-                <p className="mt-1 text-sm font-bold text-foreground">
-                  {stat.label}
-                </p>
-                <p className="mt-0.5 text-xs text-muted-foreground">
-                  {stat.sublabel}
-                </p>
-              </motion.div>
-            );
-          })}
-        </div>
+                ))}
+              </div>
 
-        <div className="mt-6 border-t border-border/60 pt-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Community milestones across our network
-          </p>
+              <div className="flex flex-col gap-4 sm:pt-4">
+                {statsColumnTwo.map((item, idx) => (
+                  <StatCard
+                    key={item.title}
+                    item={item}
+                    inView={inView}
+                    shouldReduceMotion={shouldReduceMotion}
+                    delay={0.12 + idx * 0.08}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

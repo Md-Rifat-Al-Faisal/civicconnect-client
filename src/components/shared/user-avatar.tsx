@@ -85,7 +85,7 @@ export function UserAvatar({
       <div
         title={name || "User"}
         className={cn(
-          "flex shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary via-teal-700 to-teal-900 font-extrabold text-primary-foreground shadow-xs select-none border border-primary/20",
+          "flex shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary via-[#1e4238] to-[#122822] font-extrabold text-primary-foreground shadow-xs select-none border border-primary/20",
           sizeClasses[size],
           className
         )}
@@ -105,7 +105,7 @@ export function UserAvatar({
       )}
     >
       {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary via-teal-700 to-teal-900 font-extrabold text-primary-foreground">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary via-[#1e4238] to-[#122822] font-extrabold text-primary-foreground">
           {initial ? initial : <User className={iconSizes[size]} />}
         </div>
       )}

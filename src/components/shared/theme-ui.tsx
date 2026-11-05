@@ -22,7 +22,7 @@ export function PrimaryButton({
 
   const variantStyles = {
     primary:
-      "bg-gradient-to-r from-primary via-teal-600 to-primary bg-[length:200%_auto] text-primary-foreground shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 hover:bg-right transition-all duration-300",
+      "bg-primary hover:bg-[#1e4238] dark:hover:bg-[#275246] text-primary-foreground shadow-sm shadow-primary/25 hover:shadow-md transition-all duration-200",
     secondary:
       "bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border/60 shadow-xs",
     outline:
@@ -120,7 +120,7 @@ export function SectionHeading({
       )}
     >
       <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-        <span className="bg-gradient-to-r from-primary via-teal-500 to-accent bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-primary via-[#366f5f] to-accent bg-clip-text text-transparent">
           {firstWord}
         </span>{" "}
         {rest}

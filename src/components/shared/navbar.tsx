@@ -185,7 +185,7 @@ export function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-primary to-teal-600 px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all hover:shadow-md hover:brightness-105"
+                className="flex items-center gap-1.5 rounded-lg bg-primary hover:bg-[#1e4238] dark:hover:bg-[#275246] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all hover:shadow-md"
               >
                 <LogIn className="size-4" />
                 <span>Login</span>
@@ -291,7 +291,7 @@ export function Navbar() {
               <div className="mt-2 border-t border-border pt-3">
                 <Link
                   href="/login"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary to-teal-600 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/25"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary hover:bg-[#1e4238] dark:hover:bg-[#275246] py-2.5 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/25"
                 >
                   <LogIn className="size-4" />
                   <span>Login</span>

@@ -7,6 +7,7 @@ import {
   MapPin,
   Pencil,
   Trash2,
+  Eye,
   PlusCircle,
   FolderKanban,
   AlertTriangle,
@@ -327,9 +328,18 @@ export default function ManageEventsPage() {
 
                 <div className="flex items-center gap-2 border-t border-border bg-card/60 p-4">
                   <PrimaryButton
+                    href={`/events/${event._id}`}
+                    variant="outline"
+                    className="flex-1 py-1.5 text-xs font-semibold gap-1.5"
+                  >
+                    <Eye className="size-3.5" />
+                    <span>View</span>
+                  </PrimaryButton>
+
+                  <PrimaryButton
                     variant="outline"
                     onClick={() => handleOpenEdit(event)}
-                    className="flex-1 py-1.5 text-xs font-semibold"
+                    className="flex-1 py-1.5 text-xs font-semibold gap-1.5"
                   >
                     <Pencil className="size-3.5" />
                     <span>Edit</span>
@@ -338,7 +348,7 @@ export default function ManageEventsPage() {
                   <PrimaryButton
                     variant="destructive"
                     onClick={() => handleOpenDelete(event)}
-                    className="flex-1 py-1.5 text-xs font-semibold"
+                    className="flex-1 py-1.5 text-xs font-semibold gap-1.5"
                   >
                     <Trash2 className="size-3.5" />
                     <span>Delete</span>

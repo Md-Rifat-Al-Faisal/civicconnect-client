@@ -10,7 +10,7 @@ const fallbackEvents: IEvent[] = [
     title: "Winter Clothes Distribution Mirpur 10",
     description: "Collecting and handing out warm winter jackets, sweaters, and blankets for vulnerable families and street children in Mirpur 10.",
     eventType: "Winter Relief",
-    imageUrl: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop",
     location: "Mirpur 10 Roundabout, Dhaka",
     date: "2026-11-20",
     creatorName: "Community Action Dhaka",
@@ -20,7 +20,7 @@ const fallbackEvents: IEvent[] = [
     title: "Mohammadpur Warm Blanket Drive",
     description: "Distributing quality thick blankets to elderly residents and displaced families living near the Mohammadpur embankment area.",
     eventType: "Charity",
-    imageUrl: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1544027993-37dbd58eea6d?q=80&w=800&auto=format&fit=crop",
     location: "Town Hall Ground, Mohammadpur, Dhaka",
     date: "2026-11-22",
     creatorName: "Care Network",
@@ -30,7 +30,7 @@ const fallbackEvents: IEvent[] = [
     title: "Ramna Green Tree Plantation Campaign",
     description: "Planting native shade and fruit trees around Ramna to boost urban biodiversity and foster environmental stewardship among youth.",
     eventType: "Environment",
-    imageUrl: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1594708767771-a7502209ff51?q=80&w=800&auto=format&fit=crop",
     location: "Ramna Park Main Entrance, Dhaka",
     date: "2026-11-25",
     creatorName: "Green Earth Dhaka",
@@ -40,7 +40,7 @@ const fallbackEvents: IEvent[] = [
     title: "Uttara Voluntary Blood Donation Camp",
     description: "Join registered doctors and voluntary donors to support thalassemia patients and emergency units across public hospitals.",
     eventType: "Healthcare",
-    imageUrl: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?q=80&w=800&auto=format&fit=crop",
     location: "Sector 7 Community Center, Uttara, Dhaka",
     date: "2026-11-28",
     creatorName: "LifeLine Volunteers",
@@ -50,7 +50,7 @@ const fallbackEvents: IEvent[] = [
     title: "Dhanmondi Lake Clean-Up Drive",
     description: "Volunteer morning dedicated to plastic waste removal, trash segregation, and spreading lake conservation awareness.",
     eventType: "Cleanliness",
-    imageUrl: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1617260814674-f2a875a5cb33?q=80&w=800&auto=format&fit=crop",
     location: "Dhanmondi Lake Amphitheater, Dhaka",
     date: "2026-12-02",
     creatorName: "Eco Warriors BD",
@@ -60,7 +60,7 @@ const fallbackEvents: IEvent[] = [
     title: "Free School Supplies & Bag Drive",
     description: "Providing backpacks, notebooks, pens, and storybooks to underprivileged children enrolled in informal slum schools.",
     eventType: "Education",
-    imageUrl: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=800&auto=format&fit=crop",
     location: "Korail Slum Learning Center, Banani, Dhaka",
     date: "2026-12-05",
     creatorName: "Light for Tomorrow",
@@ -69,7 +69,7 @@ const fallbackEvents: IEvent[] = [
 
 async function getRecentEvents(): Promise<IEvent[]> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
     const res = await fetch(`${apiUrl}/recent-events`, {
       cache: "no-store",
     });

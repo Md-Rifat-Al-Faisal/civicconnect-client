@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
 import { Toaster } from "sonner";
+import { cn } from "@/lib/utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,17 +33,24 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className="h-full"
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body
+        className={cn(
+          "bg-background text-foreground min-h-screen flex flex-col antialiased transition-colors duration-300",
+          geistSans.variable,
+          geistMono.variable
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
         >
-          <Navbar />
-          <main className="min-h-screen flex-1">{children}</main>
+          <Suspense fallback={<div className="h-16 w-full border-b border-border bg-background" />}>
+            <Navbar />
+          </Suspense>
+          <main className="flex-1">{children}</main>
           <Footer />
           <Toaster richColors position="top-right" />
         </ThemeProvider>

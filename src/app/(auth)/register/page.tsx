@@ -13,7 +13,6 @@ import {
   UserPlus,
   User,
   Mail,
-  Image as ImageIcon,
   Lock,
   Loader2,
   CheckCircle2,
@@ -23,7 +22,6 @@ export default function RegisterPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
@@ -31,7 +29,7 @@ export default function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !email || !photoURL || !password) {
+    if (!name || !email || !password) {
       toast.error("Please fill in all registration fields.");
       return;
     }
@@ -55,7 +53,6 @@ export default function RegisterPage() {
     const { data, error } = await authClient.signUp.email({
       name,
       email,
-      image: photoURL,
       password,
     });
     setLoading(false);
@@ -129,22 +126,6 @@ export default function RegisterPage() {
                   placeholder="volunteer@gathergood.org"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-9"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="photoURL">Profile Picture (Image URL)</Label>
-              <div className="relative">
-                <ImageIcon className="absolute top-3 left-3 size-4 text-muted-foreground" />
-                <Input
-                  id="photoURL"
-                  type="url"
-                  required
-                  placeholder="https://images.unsplash.com/photo-..."
-                  value={photoURL}
-                  onChange={(e) => setPhotoURL(e.target.value)}
                   className="pl-9"
                 />
               </div>

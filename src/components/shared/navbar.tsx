@@ -26,6 +26,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const user = session?.user;
@@ -108,20 +109,25 @@ export function Navbar() {
                   aria-label="User navigation menu"
                   className="group flex items-center gap-2 rounded-full border border-border p-0.5 transition-colors hover:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
                 >
-                  {user.image ? (
+                  {user.image && !imageError ? (
                     <img
                       src={user.image}
                       alt={user.name || "User avatar"}
                       title={user.name || "User"}
                       referrerPolicy="no-referrer"
                       className="size-9 rounded-full object-cover"
+                      onError={() => setImageError(true)}
                     />
                   ) : (
                     <div
                       title={user.name || "User"}
-                      className="flex size-9 items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white dark:bg-emerald-500 dark:text-slate-950"
+                      className="flex size-9 items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white shadow-xs dark:bg-emerald-500 dark:text-slate-950"
                     >
-                      {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                      {user.name ? (
+                        user.name.charAt(0).toUpperCase()
+                      ) : (
+                        <User className="size-4" />
+                      )}
                     </div>
                   )}
                   <ChevronDown className="mr-1.5 size-3.5 text-muted-foreground transition-transform group-hover:text-foreground" />
@@ -239,17 +245,22 @@ export function Navbar() {
             {user ? (
               <div className="mt-2 flex flex-col gap-1 border-t border-border pt-3">
                 <div className="flex items-center gap-3 px-3 py-2">
-                  {user.image ? (
+                  {user.image && !imageError ? (
                     <img
                       src={user.image}
                       alt={user.name || "User"}
                       title={user.name || "User"}
                       referrerPolicy="no-referrer"
                       className="size-9 rounded-full object-cover"
+                      onError={() => setImageError(true)}
                     />
                   ) : (
                     <div className="flex size-9 items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white">
-                      {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                      {user.name ? (
+                        user.name.charAt(0).toUpperCase()
+                      ) : (
+                        <User className="size-4" />
+                      )}
                     </div>
                   )}
                   <div className="truncate">

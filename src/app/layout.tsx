@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
+import { Navbar } from "@/components/shared/navbar";
+import { Footer } from "@/components/shared/footer";
 import { Toaster } from "sonner";
 
 const geistSans = Geist({
@@ -17,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "GatherGood - Social Development Events Platform",
   description:
-    "Community-driven event management platform where users create, join, and track local social service initiatives.",
+    "Community-driven event management platform where citizens create, join, and track local social service initiatives across Bangladesh.",
 };
 
 export default function RootLayout({
@@ -38,7 +40,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Navbar />
+          <main className="min-h-screen flex-1">{children}</main>
+          <Footer />
           <Toaster richColors position="top-right" />
         </ThemeProvider>
       </body>

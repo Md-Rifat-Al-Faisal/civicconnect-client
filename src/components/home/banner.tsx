@@ -15,8 +15,8 @@ import { Badge } from "@/components/ui/badge";
 
 export function Banner() {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-emerald-500/10 via-background to-background py-20 sm:py-28 lg:py-32">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.emerald.500/15),transparent)]" />
+    <section className="relative overflow-hidden border-b-2 border-border bg-gradient-to-b from-blue-500/10 via-background to-background py-20 sm:py-28 lg:py-32">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.blue.500/15),transparent)]" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
@@ -28,7 +28,7 @@ export function Banner() {
           >
             <Badge
               variant="default"
-              className="flex items-center gap-1.5 px-3 py-1 text-xs sm:text-sm font-medium"
+              className="flex items-center gap-1.5 px-3 py-1 text-xs sm:text-sm font-semibold rounded-sm"
             >
               <Sparkles className="size-3.5" />
               <span>Grassroots Social Development Platform</span>
@@ -42,7 +42,7 @@ export function Banner() {
             className="mt-6 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
           >
             Empower Your Community.{" "}
-            <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent dark:from-emerald-400 dark:to-teal-300">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-indigo-300">
               Drive Real Change.
             </span>
           </motion.h1>
@@ -67,7 +67,7 @@ export function Banner() {
           >
             <Link
               href="/upcoming-events"
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700 hover:shadow-emerald-600/30 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-600"
+              className="inline-flex items-center gap-2 rounded-sm bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-none transition-all hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700"
             >
               <Calendar className="size-4" />
               <span>Explore Events</span>
@@ -76,9 +76,9 @@ export function Banner() {
 
             <Link
               href="/create-event"
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3.5 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-muted"
+              className="inline-flex items-center gap-2 rounded-sm border-2 border-border bg-card px-6 py-3.5 text-sm font-semibold text-foreground shadow-none transition-colors hover:bg-muted"
             >
-              <PlusCircle className="size-4 text-emerald-600 dark:text-emerald-400" />
+              <PlusCircle className="size-4 text-blue-600 dark:text-blue-400" />
               <span>Create an Event</span>
             </Link>
           </motion.div>
@@ -90,8 +90,8 @@ export function Banner() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-3 lg:gap-8"
         >
-          <div className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 backdrop-blur-sm">
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
+          <div className="flex items-center gap-4 rounded-sm border-2 border-border bg-card p-5">
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-sm bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">
               <HeartHandshake className="size-6" />
             </div>
             <div>
@@ -102,8 +102,8 @@ export function Banner() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 backdrop-blur-sm">
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300">
+          <div className="flex items-center gap-4 rounded-sm border-2 border-border bg-card p-5">
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-sm bg-indigo-100 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
               <Users className="size-6" />
             </div>
             <div>
@@ -114,8 +114,8 @@ export function Banner() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 backdrop-blur-sm">
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300">
+          <div className="flex items-center gap-4 rounded-sm border-2 border-border bg-card p-5">
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-sm bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300">
               <MapPin className="size-6" />
             </div>
             <div>

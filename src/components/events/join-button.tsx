@@ -23,12 +23,14 @@ export function JoinButton({ event }: { event: IEvent }) {
       try {
         const token = await getTokenFromClient();
         if (!token) return;
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-        const res = await fetch(`${apiUrl}/check-joined/${event._id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/check-joined/${event._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (res.ok && active) {
           const data = await res.json();
           if (data?.joined) {
@@ -61,8 +63,7 @@ export function JoinButton({ event }: { event: IEvent }) {
         return;
       }
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const res = await fetch(`${apiUrl}/join-event`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/join-event`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,8 +88,8 @@ export function JoinButton({ event }: { event: IEvent }) {
       } else {
         toast.error(data?.msg || data?.message || "Failed to join event.");
       }
-    } catch {
-      toast.error("Unable to reach backend server. Please make sure gathergood-server is running on port 8000.");
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to join event. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -99,9 +100,9 @@ export function JoinButton({ event }: { event: IEvent }) {
       <PrimaryButton
         disabled
         variant="secondary"
-        className="w-full sm:w-auto px-6 py-3 cursor-default opacity-90 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300"
+        className="w-full sm:w-auto px-6 py-3 cursor-default opacity-90 border-2 border-blue-500/30 text-blue-700 dark:text-blue-300 rounded-sm"
       >
-        <CheckCircle2 className="size-5 text-emerald-600 dark:text-emerald-400" />
+        <CheckCircle2 className="size-5 text-blue-600 dark:text-blue-400" />
         <span>Already Joined</span>
       </PrimaryButton>
     );

@@ -16,22 +16,22 @@ export function PrimaryButton({
 }: PrimaryButtonProps) {
   const variantStyles = {
     primary:
-      "bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:text-slate-950",
+      "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white",
     secondary:
       "bg-secondary text-secondary-foreground hover:bg-muted",
     outline:
-      "border border-border bg-transparent text-foreground hover:bg-muted",
+      "border-2 border-border bg-transparent text-foreground hover:bg-muted",
     destructive:
       "bg-red-600 text-white hover:bg-red-700",
   };
 
   return (
     <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
       transition={{ duration: 0.15 }}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+        "inline-flex items-center justify-center gap-2 rounded-sm px-4 py-2 text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
         variantStyles[variant],
         className
       )}
@@ -49,9 +49,9 @@ export function AnimatedCard({
 }: HTMLMotionProps<"div">) {
   return (
     <motion.div
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      whileHover={{ y: -2, transition: { duration: 0.2 } }}
       className={cn(
-        "rounded-xl border border-border bg-card p-6 text-card-foreground shadow-sm transition-shadow hover:shadow-md",
+        "rounded-sm border-2 border-border bg-card p-6 text-card-foreground shadow-none transition-all",
         className
       )}
       {...props}
@@ -80,8 +80,8 @@ export function SectionHeading({
         className
       )}
     >
-      <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-        <span className="text-emerald-600 dark:text-emerald-400">{title.split(" ")[0]}</span>{" "}
+      <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+        <span className="text-blue-600 dark:text-blue-400">{title.split(" ")[0]}</span>{" "}
         {title.split(" ").slice(1).join(" ")}
       </h2>
       {subtitle && (

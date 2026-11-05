@@ -14,15 +14,15 @@ export function Newsletter() {
     e.preventDefault();
     if (!email) return;
     setSubscribed(true);
-    toast.success("Thank you for subscribing to GatherGood community dispatches!");
+    toast.success("Thank you for subscribing to CivicConnect community dispatches!");
     setEmail("");
   };
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-emerald-500/5 p-8 sm:p-12 lg:p-16">
+      <div className="relative overflow-hidden rounded-sm border-2 border-border bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-blue-500/5 p-8 sm:p-12 lg:p-16">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-md dark:bg-emerald-500 dark:text-slate-950">
+          <div className="mx-auto flex size-12 items-center justify-center rounded-sm bg-blue-600 text-white shadow-none dark:bg-blue-600 dark:text-white">
             <Mail className="size-6" />
           </div>
 
@@ -36,9 +36,9 @@ export function Newsletter() {
           </p>
 
           {subscribed ? (
-            <div className="mt-8 flex items-center justify-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+            <div className="mt-8 flex items-center justify-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400">
               <CheckCircle2 className="size-5" />
-              <span>You are subscribed to the GatherGood community newsletter!</span>
+              <span>You are subscribed to the CivicConnect community newsletter!</span>
             </div>
           ) : (
             <form
@@ -51,11 +51,11 @@ export function Newsletter() {
                 placeholder="Enter your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-12 w-full sm:max-w-md rounded-xl bg-card text-foreground"
+                className="h-12 w-full sm:max-w-md rounded-sm bg-card text-foreground"
               />
               <Button
                 type="submit"
-                className="h-12 rounded-xl px-6 font-semibold"
+                className="h-12 rounded-sm px-6 font-semibold"
               >
                 <Send className="size-4" />
                 <span>Subscribe</span>

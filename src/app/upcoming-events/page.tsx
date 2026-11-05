@@ -5,15 +5,14 @@ import { EventCard } from "@/components/shared/event-card";
 import { IEvent } from "@/lib/types/event";
 
 export const metadata = {
-  title: "Upcoming Initiatives - GatherGood",
+  title: "Upcoming Initiatives - CivicConnect",
   description:
     "Browse and join upcoming community social development drives and volunteer activities across Bangladesh.",
 };
 
 async function getUpcomingEvents(): Promise<IEvent[]> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    const res = await fetch(`${apiUrl}/events`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
       cache: "no-store",
     });
 
@@ -47,11 +46,11 @@ export default async function UpcomingEventsPage() {
           ))}
         </div>
       ) : (
-        <div className="mt-16 flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-card/50 p-12 text-center shadow-xs">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+        <div className="mt-16 flex flex-col items-center justify-center rounded-sm border-2 border-dashed border-border bg-card/50 p-12 text-center shadow-none">
+          <div className="flex h-16 w-16 items-center justify-center rounded-sm bg-blue-500/10 text-blue-600 dark:text-blue-400">
             <CalendarX className="h-8 w-8" />
           </div>
-          <h3 className="mt-4 text-xl font-semibold text-foreground">
+          <h3 className="mt-4 text-xl font-bold text-foreground">
             No Upcoming Initiatives Found
           </h3>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">

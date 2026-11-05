@@ -69,8 +69,7 @@ const fallbackEvents: IEvent[] = [
 
 async function getRecentEvents(): Promise<IEvent[]> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    const res = await fetch(`${apiUrl}/recent-events`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recent-events`, {
       cache: "no-store",
     });
 

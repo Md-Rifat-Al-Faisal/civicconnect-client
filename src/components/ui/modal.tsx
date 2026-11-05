@@ -47,7 +47,7 @@ export function Modal({
     >
       <div
         className={cn(
-          "relative w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-2xl max-h-[90vh] overflow-y-auto",
+          "relative w-full max-w-lg rounded-sm border-2 border-border bg-card p-6 text-card-foreground shadow-none max-h-[90vh] overflow-y-auto",
           className
         )}
       >
@@ -56,7 +56,7 @@ export function Modal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground cursor-pointer"
+            className="rounded-sm p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground cursor-pointer"
             aria-label="Close modal"
           >
             <X className="size-5" />

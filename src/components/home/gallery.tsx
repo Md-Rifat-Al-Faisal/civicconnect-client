@@ -74,27 +74,27 @@ export function Gallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.08 }}
-            whileHover={{ y: -6 }}
-            className="group relative overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg"
+            whileHover={{ y: -4 }}
+            className="group relative overflow-hidden rounded-sm border-2 border-border bg-card shadow-none transition-all"
           >
             <div className="relative aspect-4/3 w-full overflow-hidden bg-muted">
               <img
                 src={item.imageUrl}
                 alt={item.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-95" />
               <div className="absolute inset-0 flex flex-col justify-end p-5 text-white">
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-500/90 px-2.5 py-0.5 text-xs font-semibold text-white backdrop-blur-xs">
+                <span className="inline-flex w-fit items-center gap-1.5 rounded-sm bg-blue-600 px-2.5 py-0.5 text-xs font-semibold text-white">
                   <Tag className="h-3 w-3" />
                   {item.category}
                 </span>
-                <h3 className="mt-2 text-base font-semibold text-white group-hover:text-emerald-300 transition-colors">
+                <h3 className="mt-2 text-base font-bold text-white group-hover:text-blue-300 transition-colors">
                   {item.title}
                 </h3>
                 <div className="mt-1 flex items-center gap-1.5 text-xs text-white/80">
-                  <MapPin className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                  <MapPin className="h-3.5 w-3.5 text-blue-400 shrink-0" />
                   <span>{item.location}</span>
                 </div>
               </div>

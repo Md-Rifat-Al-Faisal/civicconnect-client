@@ -57,8 +57,7 @@ export default function ManageEventsPage() {
         setLoading(false);
         return;
       }
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const res = await fetch(`${apiUrl}/my-events`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-events`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -88,8 +87,7 @@ export default function ManageEventsPage() {
     setActionLoading(true);
     try {
       const token = await getTokenFromClient();
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const res = await fetch(`${apiUrl}/events/${selectedEvent._id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${selectedEvent._id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -140,8 +138,7 @@ export default function ManageEventsPage() {
     setActionLoading(true);
     try {
       const token = await getTokenFromClient();
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const res = await fetch(`${apiUrl}/events/${selectedEvent._id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${selectedEvent._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -204,11 +201,11 @@ export default function ManageEventsPage() {
 
         {loading ? (
           <div className="mt-16 flex items-center justify-center py-12">
-            <Loader2 className="size-8 animate-spin text-emerald-600 dark:text-emerald-400" />
+            <Loader2 className="size-8 animate-spin text-blue-600 dark:text-blue-400" />
           </div>
         ) : events.length === 0 ? (
-          <div className="mt-12 flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-card/50 p-12 text-center shadow-xs">
-            <div className="flex size-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+          <div className="mt-12 flex flex-col items-center justify-center rounded-sm border-2 border-dashed border-border bg-card/50 p-12 text-center shadow-none">
+            <div className="flex size-16 items-center justify-center rounded-sm bg-blue-500/10 text-blue-600 dark:text-blue-400">
               <FolderKanban className="size-8" />
             </div>
             <h3 className="mt-4 text-xl font-semibold text-foreground">
@@ -262,11 +259,11 @@ export default function ManageEventsPage() {
 
                     <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4 text-xs text-muted-foreground">
                       <div className="flex items-center gap-2">
-                        <Calendar className="size-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                        <Calendar className="size-4 shrink-0 text-blue-600 dark:text-blue-400" />
                         <span>{event.date}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <MapPin className="size-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                        <MapPin className="size-4 shrink-0 text-blue-600 dark:text-blue-400" />
                         <span className="truncate">{event.location}</span>
                       </div>
                     </div>
@@ -303,7 +300,7 @@ export default function ManageEventsPage() {
           title="Delete Initiative"
         >
           <div className="flex flex-col gap-4">
-            <div className="flex items-start gap-3 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-red-700 dark:text-red-300">
+            <div className="flex items-start gap-3 rounded-sm border-2 border-red-500/20 bg-red-500/10 p-4 text-red-700 dark:text-red-300">
               <AlertTriangle className="size-5 shrink-0 mt-0.5" />
               <div className="text-sm">
                 <p className="font-semibold">Confirm Deletion</p>
@@ -354,7 +351,7 @@ export default function ManageEventsPage() {
           <form onSubmit={handleConfirmEdit} className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="editTitle" className="flex items-center gap-1.5">
-                <FileText className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                <FileText className="size-3.5 text-blue-600 dark:text-blue-400" />
                 <span>Title</span>
               </Label>
               <Input
@@ -367,7 +364,7 @@ export default function ManageEventsPage() {
 
             <div className="space-y-1.5">
               <Label htmlFor="editEventType" className="flex items-center gap-1.5">
-                <Tag className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                <Tag className="size-3.5 text-blue-600 dark:text-blue-400" />
                 <span>Category</span>
               </Label>
               <select
@@ -375,7 +372,7 @@ export default function ManageEventsPage() {
                 required
                 value={editEventType}
                 onChange={(e) => setEditEventType(e.target.value)}
-                className="flex h-10 w-full rounded-lg border border-input bg-card px-3 py-2 text-sm text-foreground shadow-xs transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+                className="flex h-10 w-full rounded-sm border-2 border-input bg-card px-3 py-2 text-sm text-foreground shadow-none transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
               >
                 <option value="Cleanup">Cleanup</option>
                 <option value="Plantation">Plantation</option>
@@ -391,7 +388,7 @@ export default function ManageEventsPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
                 <Label htmlFor="editDate" className="flex items-center gap-1.5">
-                  <Calendar className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <Calendar className="size-3.5 text-blue-600 dark:text-blue-400" />
                   <span>Date</span>
                 </Label>
                 <Input
@@ -406,7 +403,7 @@ export default function ManageEventsPage() {
 
               <div className="space-y-1.5">
                 <Label htmlFor="editLocation" className="flex items-center gap-1.5">
-                  <MapPin className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <MapPin className="size-3.5 text-blue-600 dark:text-blue-400" />
                   <span>Location</span>
                 </Label>
                 <Input
@@ -420,7 +417,7 @@ export default function ManageEventsPage() {
 
             <div className="space-y-1.5">
               <Label htmlFor="editImageUrl" className="flex items-center gap-1.5">
-                <ImageIcon className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                <ImageIcon className="size-3.5 text-blue-600 dark:text-blue-400" />
                 <span>Thumbnail Image URL</span>
               </Label>
               <Input
@@ -434,7 +431,7 @@ export default function ManageEventsPage() {
 
             <div className="space-y-1.5">
               <Label htmlFor="editDescription" className="flex items-center gap-1.5">
-                <AlignLeft className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                <AlignLeft className="size-3.5 text-blue-600 dark:text-blue-400" />
                 <span>Description</span>
               </Label>
               <Textarea

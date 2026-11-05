@@ -8,7 +8,7 @@ import { IEvent } from "@/lib/types/event";
 
 export function EventCard({ event }: { event: IEvent }) {
   return (
-    <AnimatedCard className="group flex flex-col justify-between overflow-hidden p-0 h-full">
+    <AnimatedCard className="group flex flex-col justify-between overflow-hidden p-0 h-full rounded-sm">
       <div className="relative aspect-video w-full overflow-hidden bg-muted">
         <img
           src={event.imageUrl}
@@ -22,14 +22,14 @@ export function EventCard({ event }: { event: IEvent }) {
           }}
         />
         <div className="absolute right-3 top-3">
-          <Badge variant="default" className="shadow-sm">
+          <Badge variant="default" className="shadow-none">
             {event.eventType}
           </Badge>
         </div>
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="line-clamp-1 text-lg font-semibold text-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+        <h3 className="line-clamp-1 text-lg font-bold text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
           {event.title}
         </h3>
         <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
@@ -38,11 +38,11 @@ export function EventCard({ event }: { event: IEvent }) {
 
         <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+            <Calendar className="h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" />
             <span>{event.date}</span>
           </div>
           <div className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+            <MapPin className="h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" />
             <span className="line-clamp-1">{event.location}</span>
           </div>
         </div>

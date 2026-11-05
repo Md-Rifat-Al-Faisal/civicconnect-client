@@ -58,26 +58,26 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b-2 border-border bg-background/95 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400"
+            className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-blue-600 dark:text-blue-400"
           >
-            <div className="flex size-9 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-sm dark:bg-emerald-500 dark:text-slate-950">
+            <div className="flex size-9 items-center justify-center rounded-sm bg-blue-600 text-white shadow-none dark:bg-blue-600 dark:text-white">
               <HeartHandshake className="size-5" />
             </div>
-            <span>GatherGood</span>
+            <span>CivicConnect</span>
           </Link>
 
           <nav className="hidden md:flex md:items-center md:gap-6">
             <Link
               href="/upcoming-events"
               className={cn(
-                "flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-emerald-600 dark:hover:text-emerald-400",
+                "flex items-center gap-1.5 text-sm font-semibold transition-colors hover:text-blue-600 dark:hover:text-blue-400",
                 pathname === "/upcoming-events"
-                  ? "text-emerald-600 dark:text-emerald-400"
+                  ? "text-blue-600 dark:text-blue-400"
                   : "text-muted-foreground"
               )}
             >
@@ -95,7 +95,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="flex items-center gap-1.5 rounded-lg border border-red-500/30 px-3 py-1.5 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50 dark:border-red-500/40 dark:text-red-400 dark:hover:bg-red-950/30 cursor-pointer"
+                className="flex items-center gap-1.5 rounded-sm border border-red-500/40 px-3 py-1.5 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30 cursor-pointer"
               >
                 <LogOut className="size-3.5" />
                 <span>Logout</span>
@@ -107,7 +107,7 @@ export function Navbar() {
                   onClick={() => setDropdownOpen((prev) => !prev)}
                   title={user.name || "User profile"}
                   aria-label="User navigation menu"
-                  className="group flex items-center gap-2 rounded-full border border-border p-0.5 transition-colors hover:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+                  className="group flex items-center gap-2 rounded-sm border-2 border-border p-1 transition-colors hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
                 >
                   {user.image && !imageError ? (
                     <img
@@ -115,13 +115,13 @@ export function Navbar() {
                       alt={user.name || "User avatar"}
                       title={user.name || "User"}
                       referrerPolicy="no-referrer"
-                      className="size-9 rounded-full object-cover"
+                      className="size-8 rounded-sm object-cover"
                       onError={() => setImageError(true)}
                     />
                   ) : (
                     <div
                       title={user.name || "User"}
-                      className="flex size-9 items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white shadow-xs dark:bg-emerald-500 dark:text-slate-950"
+                      className="flex size-8 items-center justify-center rounded-sm bg-blue-600 text-sm font-bold text-white dark:bg-blue-600 dark:text-white"
                     >
                       {user.name ? (
                         user.name.charAt(0).toUpperCase()
@@ -130,13 +130,13 @@ export function Navbar() {
                       )}
                     </div>
                   )}
-                  <ChevronDown className="mr-1.5 size-3.5 text-muted-foreground transition-transform group-hover:text-foreground" />
+                  <ChevronDown className="mr-1 size-3.5 text-muted-foreground transition-transform group-hover:text-foreground" />
                 </button>
 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-56 rounded-xl border border-border bg-card p-2 text-card-foreground shadow-xl ring-1 ring-black/5 dark:ring-white/10 z-50">
+                  <div className="absolute right-0 mt-2 w-56 rounded-sm border-2 border-border bg-card p-2 text-card-foreground shadow-none ring-1 ring-black/5 dark:ring-white/10 z-50">
                     <div className="border-b border-border px-3 py-2">
-                      <p className="truncate text-sm font-semibold text-foreground">
+                      <p className="truncate text-sm font-bold text-foreground">
                         {user.name}
                       </p>
                       <p className="truncate text-xs text-muted-foreground">
@@ -148,36 +148,36 @@ export function Navbar() {
                       <Link
                         href="/create-event"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300"
+                        className="flex items-center gap-2.5 rounded-sm px-3 py-2 text-sm text-foreground transition-colors hover:bg-blue-50 hover:text-blue-700 dark:hover:bg-blue-950/40 dark:hover:text-blue-300"
                       >
-                        <PlusCircle className="size-4 text-emerald-600 dark:text-emerald-400" />
+                        <PlusCircle className="size-4 text-blue-600 dark:text-blue-400" />
                         <span>Create Event</span>
                       </Link>
 
                       <Link
                         href="/manage-events"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300"
+                        className="flex items-center gap-2.5 rounded-sm px-3 py-2 text-sm text-foreground transition-colors hover:bg-blue-50 hover:text-blue-700 dark:hover:bg-blue-950/40 dark:hover:text-blue-300"
                       >
-                        <FolderKanban className="size-4 text-emerald-600 dark:text-emerald-400" />
+                        <FolderKanban className="size-4 text-blue-600 dark:text-blue-400" />
                         <span>Manage Events</span>
                       </Link>
 
                       <Link
                         href="/joined-events"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300"
+                        className="flex items-center gap-2.5 rounded-sm px-3 py-2 text-sm text-foreground transition-colors hover:bg-blue-50 hover:text-blue-700 dark:hover:bg-blue-950/40 dark:hover:text-blue-300"
                       >
-                        <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400" />
+                        <CheckCircle2 className="size-4 text-blue-600 dark:text-blue-400" />
                         <span>Joined Events</span>
                       </Link>
 
                       <Link
                         href="/profile"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300"
+                        className="flex items-center gap-2.5 rounded-sm px-3 py-2 text-sm text-foreground transition-colors hover:bg-blue-50 hover:text-blue-700 dark:hover:bg-blue-950/40 dark:hover:text-blue-300"
                       >
-                        <User className="size-4 text-emerald-600 dark:text-emerald-400" />
+                        <User className="size-4 text-blue-600 dark:text-blue-400" />
                         <span>My Profile</span>
                       </Link>
                     </div>
@@ -186,7 +186,7 @@ export function Navbar() {
                       <button
                         type="button"
                         onClick={handleLogout}
-                        className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/40 cursor-pointer"
+                        className="flex w-full items-center gap-2.5 rounded-sm px-3 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/40 cursor-pointer"
                       >
                         <LogOut className="size-4" />
                         <span>Sign out</span>
@@ -200,7 +200,7 @@ export function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-600"
+                className="flex items-center gap-1.5 rounded-sm bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700"
               >
                 <LogIn className="size-4" />
                 <span>Login</span>
@@ -215,7 +215,7 @@ export function Navbar() {
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label="Toggle mobile menu"
-            className="flex size-9 items-center justify-center rounded-lg border border-border text-foreground hover:bg-muted"
+            className="flex size-9 items-center justify-center rounded-sm border border-border text-foreground hover:bg-muted"
           >
             {mobileMenuOpen ? (
               <X className="size-5" />
@@ -227,18 +227,18 @@ export function Navbar() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="border-b border-border bg-card px-4 pt-3 pb-6 md:hidden">
+        <div className="border-b-2 border-border bg-card px-4 pt-3 pb-6 md:hidden">
           <div className="flex flex-col gap-3">
             <Link
               href="/upcoming-events"
               className={cn(
-                "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium",
+                "flex items-center gap-2 rounded-sm px-3 py-2 text-sm font-medium",
                 pathname === "/upcoming-events"
-                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300"
+                  ? "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300"
                   : "text-foreground hover:bg-muted"
               )}
             >
-              <Calendar className="size-4 text-emerald-600 dark:text-emerald-400" />
+              <Calendar className="size-4 text-blue-600 dark:text-blue-400" />
               <span>Upcoming Events</span>
             </Link>
 
@@ -251,11 +251,11 @@ export function Navbar() {
                       alt={user.name || "User"}
                       title={user.name || "User"}
                       referrerPolicy="no-referrer"
-                      className="size-9 rounded-full object-cover"
+                      className="size-9 rounded-sm object-cover"
                       onError={() => setImageError(true)}
                     />
                   ) : (
-                    <div className="flex size-9 items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white">
+                    <div className="flex size-9 items-center justify-center rounded-sm bg-blue-600 text-sm font-semibold text-white">
                       {user.name ? (
                         user.name.charAt(0).toUpperCase()
                       ) : (
@@ -273,40 +273,40 @@ export function Navbar() {
 
                 <Link
                   href="/create-event"
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
+                  className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm font-medium hover:bg-muted"
                 >
-                  <PlusCircle className="size-4 text-emerald-600 dark:text-emerald-400" />
+                  <PlusCircle className="size-4 text-blue-600 dark:text-blue-400" />
                   <span>Create Event</span>
                 </Link>
 
                 <Link
                   href="/manage-events"
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
+                  className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm font-medium hover:bg-muted"
                 >
-                  <FolderKanban className="size-4 text-emerald-600 dark:text-emerald-400" />
+                  <FolderKanban className="size-4 text-blue-600 dark:text-blue-400" />
                   <span>Manage Events</span>
                 </Link>
 
                 <Link
                   href="/joined-events"
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
+                  className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm font-medium hover:bg-muted"
                 >
-                  <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400" />
+                  <CheckCircle2 className="size-4 text-blue-600 dark:text-blue-400" />
                   <span>Joined Events</span>
                 </Link>
 
                 <Link
                   href="/profile"
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
+                  className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm font-medium hover:bg-muted"
                 >
-                  <User className="size-4 text-emerald-600 dark:text-emerald-400" />
+                  <User className="size-4 text-blue-600 dark:text-blue-400" />
                   <span>My Profile</span>
                 </Link>
 
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="mt-2 flex items-center justify-center gap-2 rounded-lg border border-red-500/30 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+                  className="mt-2 flex items-center justify-center gap-2 rounded-sm border border-red-500/40 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
                 >
                   <LogOut className="size-4" />
                   <span>Logout</span>
@@ -316,7 +316,7 @@ export function Navbar() {
               <div className="mt-2 border-t border-border pt-3">
                 <Link
                   href="/login"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700"
+                  className="flex w-full items-center justify-center gap-2 rounded-sm bg-blue-600 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
                 >
                   <LogIn className="size-4" />
                   <span>Login</span>

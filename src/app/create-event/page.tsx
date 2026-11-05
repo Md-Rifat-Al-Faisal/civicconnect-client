@@ -60,8 +60,7 @@ export default function CreateEventPage() {
         return;
       }
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const res = await fetch(`${apiUrl}/events`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,11 +106,11 @@ export default function CreateEventPage() {
           />
         </div>
 
-        <AnimatedCard className="mt-8 p-6 sm:p-8">
+        <AnimatedCard className="mt-8 p-6 sm:p-8 rounded-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="title" className="flex items-center gap-2">
-                <FileText className="size-4 text-emerald-600 dark:text-emerald-400" />
+                <FileText className="size-4 text-blue-600 dark:text-blue-400" />
                 <span>Initiative Title</span>
               </Label>
               <Input
@@ -126,7 +125,7 @@ export default function CreateEventPage() {
 
             <div className="space-y-2">
               <Label htmlFor="eventType" className="flex items-center gap-2">
-                <Tag className="size-4 text-emerald-600 dark:text-emerald-400" />
+                <Tag className="size-4 text-blue-600 dark:text-blue-400" />
                 <span>Initiative Category</span>
               </Label>
               <select
@@ -134,7 +133,7 @@ export default function CreateEventPage() {
                 required
                 value={eventType}
                 onChange={(e) => setEventType(e.target.value)}
-                className="flex h-10 w-full rounded-lg border border-input bg-card px-3 py-2 text-sm text-foreground shadow-xs transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+                className="flex h-10 w-full rounded-sm border-2 border-input bg-card px-3 py-2 text-sm text-foreground shadow-none transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
               >
                 <option value="Cleanup">Cleanup</option>
                 <option value="Plantation">Plantation</option>
@@ -150,7 +149,7 @@ export default function CreateEventPage() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="date" className="flex items-center gap-2">
-                  <Calendar className="size-4 text-emerald-600 dark:text-emerald-400" />
+                  <Calendar className="size-4 text-blue-600 dark:text-blue-400" />
                   <span>Event Date</span>
                 </Label>
                 <Input
@@ -165,7 +164,7 @@ export default function CreateEventPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="location" className="flex items-center gap-2">
-                  <MapPin className="size-4 text-emerald-600 dark:text-emerald-400" />
+                  <MapPin className="size-4 text-blue-600 dark:text-blue-400" />
                   <span>Location</span>
                 </Label>
                 <Input
@@ -181,7 +180,7 @@ export default function CreateEventPage() {
 
             <div className="space-y-2">
               <Label htmlFor="imageUrl" className="flex items-center gap-2">
-                <ImageIcon className="size-4 text-emerald-600 dark:text-emerald-400" />
+                <ImageIcon className="size-4 text-blue-600 dark:text-blue-400" />
                 <span>Thumbnail Image URL</span>
               </Label>
               <Input
@@ -193,7 +192,7 @@ export default function CreateEventPage() {
                 onChange={(e) => setImageUrl(e.target.value)}
               />
               {imageUrl && (
-                <div className="mt-3 aspect-21/9 w-full overflow-hidden rounded-lg border border-border bg-muted">
+                <div className="mt-3 aspect-21/9 w-full overflow-hidden rounded-sm border-2 border-border bg-muted">
                   <img
                     src={imageUrl}
                     alt="Preview"
@@ -208,7 +207,7 @@ export default function CreateEventPage() {
 
             <div className="space-y-2">
               <Label htmlFor="description" className="flex items-center gap-2">
-                <AlignLeft className="size-4 text-emerald-600 dark:text-emerald-400" />
+                <AlignLeft className="size-4 text-blue-600 dark:text-blue-400" />
                 <span>Detailed Description</span>
               </Label>
               <Textarea
@@ -224,7 +223,7 @@ export default function CreateEventPage() {
             <PrimaryButton
               type="submit"
               disabled={loading}
-              className="mt-6 w-full py-3 text-base shadow-md"
+              className="mt-6 w-full py-3 text-base shadow-none"
             >
               {loading ? (
                 <>

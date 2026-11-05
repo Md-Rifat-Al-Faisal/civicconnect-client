@@ -10,28 +10,28 @@ export function Features() {
       title: "Organize Initiatives",
       description:
         "Launch winter clothing distributions, flood relief centers, or canal cleanups in minutes. Set venues, dates, and volunteer quotas with straightforward tools.",
-      color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300",
+      color: "bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300",
     },
     {
       icon: HeartHandshake,
       title: "Volunteer Locally",
       description:
         "Find social development projects taking place right in your community. Join upcoming events with a single click and team up with passionate neighbors.",
-      color: "bg-teal-100 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300",
+      color: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300",
     },
     {
       icon: LineChart,
       title: "Track Community Impact",
       description:
         "Review your volunteer journey, manage the events you host, and follow the real difference your collective time and dedication make across the country.",
-      color: "bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300",
+      color: "bg-slate-100 text-slate-700 dark:bg-slate-900 dark:text-slate-300",
     },
   ];
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeading
-        title="Why GatherGood Matters"
+        title="Why CivicConnect Matters"
         subtitle="Empowering communities with transparent, reliable tools for civic action and grassroots social service"
         centered
       />
@@ -40,10 +40,10 @@ export function Features() {
         {features.map((feature, index) => {
           const Icon = feature.icon;
           return (
-            <AnimatedCard key={index} className="flex flex-col justify-between">
+            <AnimatedCard key={index} className="flex flex-col justify-between rounded-sm">
               <div>
                 <div
-                  className={`flex size-12 items-center justify-center rounded-xl ${feature.color}`}
+                  className={`flex size-12 items-center justify-center rounded-sm ${feature.color}`}
                 >
                   <Icon className="size-6" />
                 </div>
@@ -56,7 +56,7 @@ export function Features() {
               </div>
 
               <div className="mt-6 border-t border-border pt-4">
-                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                   Community Verified
                 </span>
               </div>

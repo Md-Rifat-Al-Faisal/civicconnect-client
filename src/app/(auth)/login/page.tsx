@@ -37,7 +37,7 @@ export default function LoginPage() {
     }
 
     if (data) {
-      toast.success("Welcome back to GatherGood!");
+      toast.success("Welcome back to CivicConnect!");
       router.push("/");
       router.refresh();
     }
@@ -60,18 +60,18 @@ export default function LoginPage() {
     <div className="flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-md dark:bg-emerald-500 dark:text-slate-950">
+          <div className="mx-auto flex size-12 items-center justify-center rounded-sm bg-blue-600 text-white shadow-none dark:bg-blue-600 dark:text-white">
             <HeartHandshake className="size-6" />
           </div>
-          <h1 className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          <h1 className="mt-4 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
             Welcome Back
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to continue organizing and volunteering with GatherGood
+            Sign in to continue organizing and volunteering with CivicConnect
           </p>
         </div>
 
-        <AnimatedCard className="p-8">
+        <AnimatedCard className="p-8 rounded-sm">
           <form onSubmit={handleEmailLogin} className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="email">Email Address</Label>
@@ -81,7 +81,7 @@ export default function LoginPage() {
                   id="email"
                   type="email"
                   required
-                  placeholder="volunteer@gathergood.org"
+                  placeholder="volunteer@civicconnect.org"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-9"
@@ -131,7 +131,7 @@ export default function LoginPage() {
               <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">
+              <span className="bg-card px-2 text-muted-foreground font-semibold">
                 Or continue with
               </span>
             </div>
@@ -141,7 +141,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={googleLoading}
-            className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-border bg-card py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 cursor-pointer"
+            className="flex w-full items-center justify-center gap-2.5 rounded-sm border-2 border-border bg-card py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 cursor-pointer"
           >
             {googleLoading ? (
               <Loader2 className="size-4 animate-spin text-muted-foreground" />
@@ -172,7 +172,7 @@ export default function LoginPage() {
             Don&apos;t have an account?{" "}
             <Link
               href="/register"
-              className="font-semibold text-emerald-600 underline-offset-4 hover:underline dark:text-emerald-400"
+              className="font-semibold text-blue-600 underline-offset-4 hover:underline dark:text-blue-400"
             >
               Create one now
             </Link>

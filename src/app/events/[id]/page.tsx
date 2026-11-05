@@ -27,7 +27,7 @@ const fallbackSeeds: Record<string, IEvent> = {
     location: "Mirpur 10 Roundabout, Dhaka",
     date: "2026-11-20",
     creatorName: "Community Action Dhaka",
-    creatorEmail: "action@gathergood.org",
+    creatorEmail: "action@civicconnect.org",
   },
   "seed-2": {
     _id: "seed-2",
@@ -38,7 +38,7 @@ const fallbackSeeds: Record<string, IEvent> = {
     location: "Town Hall Ground, Mohammadpur, Dhaka",
     date: "2026-11-22",
     creatorName: "Care Network",
-    creatorEmail: "care@gathergood.org",
+    creatorEmail: "care@civicconnect.org",
   },
   "seed-3": {
     _id: "seed-3",
@@ -49,7 +49,7 @@ const fallbackSeeds: Record<string, IEvent> = {
     location: "Ramna Park Main Entrance, Dhaka",
     date: "2026-11-25",
     creatorName: "Green Earth Dhaka",
-    creatorEmail: "green@gathergood.org",
+    creatorEmail: "green@civicconnect.org",
   },
   "seed-4": {
     _id: "seed-4",
@@ -60,7 +60,7 @@ const fallbackSeeds: Record<string, IEvent> = {
     location: "Sector 7 Community Center, Uttara, Dhaka",
     date: "2026-11-28",
     creatorName: "LifeLine Volunteers",
-    creatorEmail: "lifeline@gathergood.org",
+    creatorEmail: "lifeline@civicconnect.org",
   },
   "seed-5": {
     _id: "seed-5",
@@ -71,7 +71,7 @@ const fallbackSeeds: Record<string, IEvent> = {
     location: "Dhanmondi Lake Amphitheater, Dhaka",
     date: "2026-12-02",
     creatorName: "Eco Warriors BD",
-    creatorEmail: "ecowarriors@gathergood.org",
+    creatorEmail: "ecowarriors@civicconnect.org",
   },
   "seed-6": {
     _id: "seed-6",
@@ -82,16 +82,15 @@ const fallbackSeeds: Record<string, IEvent> = {
     location: "Korail Slum Learning Center, Banani, Dhaka",
     date: "2026-12-05",
     creatorName: "Light for Tomorrow",
-    creatorEmail: "light@gathergood.org",
+    creatorEmail: "light@civicconnect.org",
   },
 };
 
 async function getEvent(id: string): Promise<IEvent | null> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    let res = await fetch(`${apiUrl}/event/${id}`, { cache: "no-store" });
+    let res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event/${id}`, { cache: "no-store" });
     if (!res.ok) {
-      res = await fetch(`${apiUrl}/events/${id}`, { cache: "no-store" });
+      res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${id}`, { cache: "no-store" });
     }
     if (res.ok) {
       const data = await res.json();
@@ -111,11 +110,11 @@ export async function generateMetadata({ params }: EventDetailsPageProps) {
   const event = await getEvent(id);
   if (!event) {
     return {
-      title: "Event Not Found - GatherGood",
+      title: "Event Not Found - CivicConnect",
     };
   }
   return {
-    title: `${event.title} - GatherGood`,
+    title: `${event.title} - CivicConnect`,
     description: event.description.slice(0, 160),
   };
 }
@@ -134,20 +133,20 @@ export default async function EventDetailsPage({
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       <Link
         href="/upcoming-events"
-        className="group mb-6 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
+        className="group mb-6 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-blue-600 dark:hover:text-blue-400"
       >
         <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
         <span>Back to Upcoming Initiatives</span>
       </Link>
 
-      <div className="relative aspect-21/9 w-full overflow-hidden rounded-2xl border border-border bg-muted shadow-md">
+      <div className="relative aspect-21/9 w-full overflow-hidden rounded-sm border-2 border-border bg-muted shadow-none">
         <img
           src={event.imageUrl}
           alt={event.title}
           className="h-full w-full object-cover"
         />
         <div className="absolute top-4 right-4">
-          <Badge variant="default" className="px-3 py-1 text-xs font-semibold shadow-md">
+          <Badge variant="default" className="px-3 py-1 text-xs font-semibold shadow-none">
             {event.eventType}
           </Badge>
         </div>
@@ -160,9 +159,9 @@ export default async function EventDetailsPage({
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 rounded-2xl border border-border bg-card p-5 shadow-xs sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 rounded-sm border-2 border-border bg-card p-5 shadow-none sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <div className="flex size-10 items-center justify-center rounded-sm bg-blue-500/10 text-blue-600 dark:text-blue-400">
               <Calendar className="size-5" />
             </div>
             <div>
@@ -176,7 +175,7 @@ export default async function EventDetailsPage({
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <div className="flex size-10 items-center justify-center rounded-sm bg-blue-500/10 text-blue-600 dark:text-blue-400">
               <MapPin className="size-5" />
             </div>
             <div>
@@ -190,7 +189,7 @@ export default async function EventDetailsPage({
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <div className="flex size-10 items-center justify-center rounded-sm bg-blue-500/10 text-blue-600 dark:text-blue-400">
               <User className="size-5" />
             </div>
             <div>
@@ -204,7 +203,7 @@ export default async function EventDetailsPage({
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <div className="flex size-10 items-center justify-center rounded-sm bg-blue-500/10 text-blue-600 dark:text-blue-400">
               <Tag className="size-5" />
             </div>
             <div>
@@ -218,7 +217,7 @@ export default async function EventDetailsPage({
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8">
+        <div className="rounded-sm border-2 border-border bg-card p-6 shadow-none sm:p-8">
           <h2 className="text-xl font-bold tracking-tight text-foreground">
             About This Social Initiative
           </h2>
@@ -227,7 +226,7 @@ export default async function EventDetailsPage({
           </div>
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6 shadow-xs sm:flex-row sm:items-center sm:p-8">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-sm border-2 border-blue-500/30 bg-blue-500/5 p-6 shadow-none sm:flex-row sm:items-center sm:p-8">
           <div>
             <h3 className="text-lg font-bold text-foreground">
               Ready to take action in your community?

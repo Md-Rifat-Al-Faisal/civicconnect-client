@@ -12,9 +12,9 @@ export function PageSkeleton() {
         {Array.from({ length: 6 }).map((_, i) => (
           <div
             key={i}
-            className="flex flex-col rounded-xl border border-border bg-card p-4 shadow-sm"
+            className="flex flex-col rounded-sm border-2 border-border bg-card p-4 shadow-none"
           >
-            <Skeleton className="aspect-video w-full rounded-lg" />
+            <Skeleton className="aspect-video w-full rounded-sm" />
             <div className="mt-4 flex flex-col gap-2">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-6 w-3/4" />
@@ -22,8 +22,8 @@ export function PageSkeleton() {
               <Skeleton className="h-4 w-2/3" />
             </div>
             <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
-              <Skeleton className="h-8 w-24 rounded-lg" />
-              <Skeleton className="h-8 w-24 rounded-lg" />
+              <Skeleton className="h-8 w-24 rounded-sm" />
+              <Skeleton className="h-8 w-24 rounded-sm" />
             </div>
           </div>
         ))}

@@ -1,14 +1,17 @@
+"use client";
+
 import * as React from "react";
+import { Avatar as AvatarPrimitive } from "@base-ui/react";
 import { cn } from "@/lib/utils";
 
 export function Avatar({
   className,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<typeof AvatarPrimitive.Root>) {
   return (
-    <div
+    <AvatarPrimitive.Root
       className={cn(
-        "relative flex size-10 shrink-0 overflow-hidden rounded-full border border-border bg-muted",
+        "relative flex size-10 shrink-0 overflow-hidden rounded-sm border-2 border-border",
         className
       )}
       {...props}
@@ -18,16 +21,10 @@ export function Avatar({
 
 export function AvatarImage({
   className,
-  src,
-  alt = "",
   ...props
-}: React.ComponentProps<"img">) {
-  if (!src) return null;
+}: React.ComponentProps<typeof AvatarPrimitive.Image>) {
   return (
-    <img
-      src={src}
-      alt={alt}
-      referrerPolicy="no-referrer"
+    <AvatarPrimitive.Image
       className={cn("aspect-square size-full object-cover", className)}
       {...props}
     />
@@ -37,11 +34,11 @@ export function AvatarImage({
 export function AvatarFallback({
   className,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
   return (
-    <div
+    <AvatarPrimitive.Fallback
       className={cn(
-        "flex size-full items-center justify-center rounded-full bg-emerald-600 font-medium text-white",
+        "flex size-full items-center justify-center rounded-sm bg-blue-600 font-bold text-white",
         className
       )}
       {...props}
